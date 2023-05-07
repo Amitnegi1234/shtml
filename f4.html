@@ -40,9 +40,19 @@
   //  console.log(document.images); 
   //  console.log(document.forms[0]); 
   //  console.log(document.all[10]); 
-   var headerTitle=document.getElementById('header-title');
-   console.log(headerTitle);
-   headerTitle.style.color="red";
+  //  var headerTitle=document.getElementById('header-title');
+  //  console.log(headerTitle);
+  //  headerTitle.style.color="red";
+ 
+   let items=document.getElementsByClassName('list-group-item');
+   console.log(items);
+   console.log(items[1]);
+   items[1].textContent= 'hello 2';
+   items[2].style.backgroundColor='green';
+   items[0].style.fontWeight='bold';
+   items[1].style.fontWeight='bold';
+   items[2].style.fontWeight='bold';
+   items[3].style.fontWeight='bold';
   </script>
 </body>
 </html>
