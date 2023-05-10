@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" onsubmit="onsignup(event)">
+        <center>
+        <label>Name</label>
+        <input type="text" name="na" id="na"><br><br>
+        <label>Email</label>
+        <input type="text" name="em" id="em"><br><br>
+        <label>Password</label>
+        <input type="text" name="ps" id="ps"><br><br>
+        <button id="btn">Submit</button>
+        <div>
+            <ul id="display"></ul>
+        </div>
+    </center>
+    </form>
+    <script>
+        function onsignup(event){
+            event.preventDefault();
+            let name=document.getElementById('na').value;
+            let email =document.getElementById('em').value;
+            let password=document.getElementById('ps').value;
+          
+
+       const userDetails={
+        name : name,
+        email : email,
+        password : password
+       }
+
+       let allUsers=JSON.parse(localStorage.getItem("allUsers")) || []
+       allUsers.push(userDetails);
+       localStorage.setItem('allUsers', JSON.stringify(allUsers));
+
+       document.getElementById('na').value=" ";
+       document.getElementById('em').value=" ";
+       document.getElementById('ps').value=" ";
+
+
+       
+        display();
+        function display(){
+            var par=document.getElementById("display");
+            let child=document.createElement("li");
+            child.textContent= `${userDetails.name} ${userDetails.email} ${userDetails.password}`;
+            par.appendChild(child);
+
+            let DeleteButton=document.createElement("input");
+        DeleteButton.type='button';
+        DeleteButton.style.backgroundColor="red";
+        DeleteButton.style.color="white";
+        DeleteButton.value='delete';
+        child.appendChild(DeleteButton);
+
+            DeleteButton.onclick = () => {
+                localStorage.removeItem(userDetails.name);
+                localStorage.removeItem(userDetails.email);
+                localStorage.removeItem(userDetails.password);
+                par.removeChild(child);
+                
+            }
+
+           
+
+        }
+
+        
+
+
+
+    }
+       
+    </script>
+</body>
+</html>
