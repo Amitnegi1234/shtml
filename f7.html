@@ -67,7 +67,51 @@
                 
             }
 
-           
+            let editButton=document.createElement("input");
+            editButton.type='button';
+            editButton.style.backgroundColor="black";
+            editButton.style.color="white";
+            editButton.value='edit';
+            child.appendChild(editButton);
+
+            editButton.onclick = () => {
+    document.getElementById('na').value = userDetails.name;
+    document.getElementById('em').value = userDetails.email;
+    document.getElementById('ps').value = userDetails.password;
+}
+function onsignup(event){
+    event.preventDefault();
+    let name = document.getElementById('na').value;
+    let email = document.getElementById('em').value;
+    let password = document.getElementById('ps').value;
+    let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
+
+    const userDetails = {
+        name: name,
+        email: email,
+        password: password
+    }
+
+    // Check if user already exists in array
+    const index = allUsers.findIndex(user => user.email === email);
+    if (index !== -1) {
+        // Remove old user details from array
+        allUsers.splice(index, 1);
+    }
+
+    // Add edited user details to array
+    allUsers.push(userDetails);
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+
+    document.getElementById('na').value = "";
+    document.getElementById('em').value = "";
+    document.getElementById('ps').value = "";
+    display();
+}
+
+
+
+            
 
         }
 
