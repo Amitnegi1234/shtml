@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" onsubmit="onsignup(event)">
+      <label>chooseExpenseamount:</label>
+      <input type="text" name="e" id="e">
+      <label>chooseDescription:</label>  
+      <input type="text" name="d" id="d">
+      <label>chooseCategory:</label>
+      <select id="m">
+      <option value=""  ></option>
+      <option value="movies" >movies</option>
+      <option value="fuel"   >fuel</option>
+      <option value="cricket" >cricket</option>
+      <option value="football">football</option>
+      <option value="song" > song</option>
+    </select>
+    <button id="btn">AddExpense</button>
+    <div>
+      <ul id="display"></ul>
+  </div>
+    </form>
+    <script>
+      function  onsignup(event){
+        event.preventDefault();
+        let amount=document.getElementById('e').value;
+        let des=document.getElementById('d').value;
+        let cat=document.getElementById('m').value;
+
+        const userDetails={
+          amount : amount,
+          des : des,
+          cat : cat
+
+       
+       }
+
+
+       let allUsers=JSON.parse(localStorage.getItem("allUsers")) || []
+       allUsers.push(userDetails);
+       localStorage.setItem('allUsers', JSON.stringify(allUsers));
+
+       document.getElementById('e').value=" ";
+       document.getElementById('d').value=" ";
+       document.getElementById('m').value=" ";
+
+
+       
+        display();
+        function display(){
+            var par=document.getElementById("display");
+            let child=document.createElement("li");
+            child.textContent= `${userDetails.amount} ${userDetails.des} ${userDetails.cat}`;
+            par.appendChild(child);
+
+            let DeleteButton=document.createElement("input");
+        DeleteButton.type='button';
+        DeleteButton.style.backgroundColor="red";
+        DeleteButton.style.color="white";
+        DeleteButton.value='delete';
+        child.appendChild(DeleteButton);
+
+            DeleteButton.onclick = () => {
+                localStorage.removeItem(userDetails.amount);
+                localStorage.removeItem(userDetails.des);
+                localStorage.removeItem(userDetails.cat);
+                par.removeChild(child);
+                
+            }
+
+            let editButton=document.createElement("input");
+            editButton.type='button';
+            editButton.style.backgroundColor="black";
+            editButton.style.color="white";
+            editButton.value='edit';
+            child.appendChild(editButton);
+
+            editButton.onclick = () => {
+    document.getElementById('e').value = userDetails.amount;
+    document.getElementById('d').value = userDetails.des;
+    document.getElementById('m').value = userDetails.cat;
+}
+function onsignup(event){
+    event.preventDefault();
+    let amount = document.getElementById('e').value;
+    let des = document.getElementById('d').value;
+    let cat = document.getElementById('m').value;
+    let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
+
+    const userDetails={
+          amount : amount,
+          des : des,
+          cat : cat
+
+       
+       }
+
+}
+
+        }
+
+      }
+    </script>
+</body>
+</html>
